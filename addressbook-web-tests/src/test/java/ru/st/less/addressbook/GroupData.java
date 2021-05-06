@@ -1,11 +1,11 @@
 package ru.st.less.addressbook;
 
-public class GroupDate {
+public class GroupData {
     private final String groupname;
     private final String groupheader;
     private final String groupfooter;
 
-    public GroupDate(String groupname, String groupheader, String groupfooter) {
+    public GroupData(String groupname, String groupheader, String groupfooter) {
         this.groupname = groupname;
         this.groupheader = groupheader;
         this.groupfooter = groupfooter;
