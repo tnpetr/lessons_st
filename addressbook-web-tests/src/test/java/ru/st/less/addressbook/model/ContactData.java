@@ -1,4 +1,4 @@
-package ru.st.less.addressbook;
+package ru.st.less.addressbook.model;
 
 public class ContactData {
     private final String fname;
