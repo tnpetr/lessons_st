@@ -42,4 +42,13 @@ public class ContactHelper extends BaseHelper {
     public void updateContact() {
         click(By.xpath("(//input[@name='update'])[1]"));
     }
+
+    public void selectContact() {
+        click(By.id("1"));
+    }
+
+    public void deleteContact() {
+        click(By.xpath("//input[@value='Delete']"));
+        wd.switchTo().alert().accept();
+    }
 }
