@@ -3,7 +3,7 @@ package ru.st.less.addressbook.tests;
 import org.testng.annotations.Test;
 import ru.st.less.addressbook.model.ContactData;
 
-public class ContactCreationTest extends TestBase{
+public class ContactCreationTests extends TestBase{
 
   @Test
   public void testContactCreation() {
