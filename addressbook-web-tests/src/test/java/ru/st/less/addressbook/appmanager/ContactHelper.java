@@ -37,6 +37,10 @@ public class ContactHelper extends BaseHelper {
         click(By.linkText("add new"));
     }
 
+    public void returnToHomePage() {
+        click(By.linkText("home page"));
+    }
+
     public void editContact() {
         click(By.xpath("(//img[@alt='Edit'])[1]"));
     }
@@ -52,5 +56,16 @@ public class ContactHelper extends BaseHelper {
     public void deleteContact() {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
+    }
+
+    public void createContact(ContactData contactData, boolean b) {
+        newContactLink();
+        fillContactForm(contactData,b);
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
