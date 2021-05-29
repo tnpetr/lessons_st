@@ -2,6 +2,7 @@ package ru.st.less.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import ru.st.less.addressbook.model.ContactData;
 
 public class ContactHelper extends BaseHelper {
@@ -14,7 +15,7 @@ public class ContactHelper extends BaseHelper {
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData,boolean creation) {
         type(By.name("firstname"), contactData.getFname());
         type(By.name("lastname"), contactData.getLname());
         type(By.name("middlename"), contactData.getMname());
@@ -25,14 +26,15 @@ public class ContactHelper extends BaseHelper {
         select(By.name("bmonth"), contactData.getBmonth());
         type(By.name("byear"), contactData.getByear());
         type(By.name("title"), contactData.getTitle());
+        if (creation) {
+            select(By.name("new_group"), contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
     }
 
     public void newContactLink() {
         click(By.linkText("add new"));
-    }
-
-    public void returnToHomePage() {
-        click(By.linkText("home page"));
     }
 
     public void editContact() {

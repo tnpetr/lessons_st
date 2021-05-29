@@ -19,17 +19,22 @@ public class BaseHelper {
 
     protected void type(By locator, String text) {
         click(locator);
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
+        if (text != null) {
+            String existingText = wd.findElement(locator).getAttribute("value");
+            if (! text.equals(existingText)) {
+                wd.findElement(locator).clear();
+                wd.findElement(locator).sendKeys(text);
+            }
+        }
     }
 
     protected void select(By locator, String text) {
         wd.findElement(locator).click();
         new Select(wd.findElement(locator)).selectByVisibleText(text);
-        wd.findElement(By.xpath("//option[@value='" + text + "']")).click();
+        //wd.findElement(By.xpath("//option[@value='" + text + "']")).click();
     }
 
-    private boolean isElementPresent(By by) {
+    protected boolean isElementPresent(By by) {
         try {
             wd.findElement(by);
             return true;
