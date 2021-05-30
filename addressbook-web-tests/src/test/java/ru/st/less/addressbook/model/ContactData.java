@@ -1,48 +1,18 @@
 package ru.st.less.addressbook.model;
 
 public class ContactData {
-    private final String fname;
-    private final String lname;
-    private final String mname;
-    private final String nickname;
-    private final String mobile;
-    private final String email;
-    private final String bday;
-    private final String bmonth;
-    private final String byear;
-    private final String title;
+    private String fname;
+    private String lname;
+    private String mname;
+    private String nickname;
+    private String mobile;
+    private String email;
+    private String bday;
+    private String bmonth;
+    private String byear;
+    private String title;
     private String group;
-    private int id;
-
-    public ContactData(String fname, String lname, String mname, String nickname, String mobile, String email, String bday, String bmonth, String byear, String title, String group ) {
-        this.id = Integer.MAX_VALUE;
-        this.fname = fname;
-        this.lname = lname;
-        this.mname = mname;
-        this.nickname = nickname;
-        this.mobile = mobile;
-        this.email = email;
-        this.bday = bday;
-        this.bmonth = bmonth;
-        this.byear = byear;
-        this.title = title;
-        this.group = group;
-    }
-
-    public ContactData(int id, String fname, String lname ) {
-        this.id = id;
-        this.fname = fname;
-        this.lname = lname;
-        this.mname = "";
-        this.nickname = "";
-        this.mobile = "";
-        this.email = "";
-        this.bday = "";
-        this.bmonth = "";
-        this.byear = "";
-        this.title = "";
-        this.group = "";
-    }
+    private int id = Integer.MAX_VALUE;
 
     public String getFname() {
         return fname;
@@ -92,8 +62,84 @@ public class ContactData {
         return id;
     }
 
-    public void setId(int id) {
+    public ContactData withFname(String fname) {
+        this.fname = fname;
+        return this;
+    }
+
+    public ContactData withLname(String lname) {
+        this.lname = lname;
+        return this;
+    }
+
+    public ContactData withMname(String mname) {
+        this.mname = mname;
+        return this;
+    }
+
+    public ContactData withNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+    public ContactData withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withBday(String bday) {
+        this.bday = bday;
+        return this;
+    }
+
+    public ContactData withBmonth(String bmonth) {
+        this.bmonth = bmonth;
+        return this;
+    }
+
+    public ContactData withByear(String byear) {
+        this.byear = byear;
+        return this;
+    }
+
+    public ContactData withTitle(String title) {
+        this.title = title;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        if (id != that.id) return false;
+        if (fname != null ? !fname.equals(that.fname) : that.fname != null) return false;
+        return lname != null ? lname.equals(that.lname) : that.lname == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = fname != null ? fname.hashCode() : 0;
+        result = 31 * result + (lname != null ? lname.hashCode() : 0);
+        result = 31 * result + id;
+        return result;
     }
 
     @Override
@@ -105,21 +151,4 @@ public class ContactData {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ContactData that = (ContactData) o;
-
-        if (fname != null ? !fname.equals(that.fname) : that.fname != null) return false;
-        return lname != null ? lname.equals(that.lname) : that.lname == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = fname != null ? fname.hashCode() : 0;
-        result = 31 * result + (lname != null ? lname.hashCode() : 0);
-        return result;
-    }
 }

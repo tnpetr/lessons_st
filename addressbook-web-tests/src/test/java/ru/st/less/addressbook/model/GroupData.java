@@ -2,22 +2,27 @@ package ru.st.less.addressbook.model;
 
 public class GroupData {
 
-    private int id;
-    private final String groupname;
-    private final String groupheader;
-    private final String groupfooter;
+    private int id = Integer.MAX_VALUE;
+    private String groupname;
+    private String groupheader;
+    private String groupfooter;
 
-    public GroupData(String groupname, String groupheader, String groupfooter) {
-        this.id = Integer.MAX_VALUE;
-        this.groupname = groupname;
-        this.groupheader = groupheader;
-        this.groupfooter = groupfooter;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        GroupData groupData = (GroupData) o;
+
+        if (id != groupData.id) return false;
+        return groupname != null ? groupname.equals(groupData.groupname) : groupData.groupname == null;
     }
-    public GroupData(int id, String groupname, String groupheader, String groupfooter) {
-        this.id = id;
-        this.groupname = groupname;
-        this.groupheader = groupheader;
-        this.groupfooter = groupfooter;
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (groupname != null ? groupname.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -28,27 +33,28 @@ public class GroupData {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        GroupData groupData = (GroupData) o;
-
-        return groupname != null ? groupname.equals(groupData.groupname) : groupData.groupname == null;
+    public GroupData withId(int id) {
+        this.id = id;
+        return this;
     }
 
-    @Override
-    public int hashCode() {
-        return groupname != null ? groupname.hashCode() : 0;
+    public GroupData withGroupname(String groupname) {
+        this.groupname = groupname;
+        return this;
+    }
+
+    public GroupData withGroupheader(String groupheader) {
+        this.groupheader = groupheader;
+        return this;
+    }
+
+    public GroupData withGroupfooter(String groupfooter) {
+        this.groupfooter = groupfooter;
+        return this;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getGroupname() {
