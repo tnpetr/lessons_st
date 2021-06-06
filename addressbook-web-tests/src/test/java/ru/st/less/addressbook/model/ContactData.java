@@ -1,5 +1,7 @@
 package ru.st.less.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
     private String fname;
     private String lname;
@@ -19,6 +21,7 @@ public class ContactData {
     private String allPhones;
     private String allEmails;
     private String address;
+    private File photo;
     private int id = Integer.MAX_VALUE;
 
     public String getFname() {
@@ -189,6 +192,15 @@ public class ContactData {
 
     public ContactData withAddress(String address) {
         this.address = address;
+        return this;
+    }
+
+    public File getPhoto() {
+        return photo;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
         return this;
     }
 

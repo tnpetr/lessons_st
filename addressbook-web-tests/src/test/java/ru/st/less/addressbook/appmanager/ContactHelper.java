@@ -32,6 +32,7 @@ public class ContactHelper extends BaseHelper {
         select(By.name("bmonth"), contactData.getBmonth());
         type(By.name("byear"), contactData.getByear());
         type(By.name("title"), contactData.getTitle());
+        attach(By.name("photo"), contactData.getPhoto());
         if (creation) {
             select(By.name("new_group"), contactData.getGroup());
         } else {

@@ -1,10 +1,15 @@
 package ru.st.less.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 public class GroupData {
 
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String groupname;
+    @Expose
     private String groupheader;
+    @Expose
     private String groupfooter;
 
     @Override
