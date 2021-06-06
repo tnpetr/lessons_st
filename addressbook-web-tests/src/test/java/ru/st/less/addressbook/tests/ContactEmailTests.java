@@ -3,13 +3,14 @@ package ru.st.less.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.st.less.addressbook.model.ContactData;
-import ru.st.less.addressbook.model.Contacts;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
-public class ContactDeletionTests extends TestBase{
+public class ContactEmailTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -20,7 +21,11 @@ public class ContactDeletionTests extends TestBase{
                     .withMname("V")
                     .withNickname("N")
                     .withMobile("+7123456789")
+                    .withHomePhone("+7-(192)-00000")
+                    .withWorkPhone("186 73")
                     .withEmail("ptatarkin@n.ru")
+                    .withEmail2("ptatarkin@n.ru")
+                    .withEmail3("ptatarkin@n.ru")
                     .withBday("1")
                     .withBmonth("January")
                     .withByear("2000")
@@ -30,14 +35,17 @@ public class ContactDeletionTests extends TestBase{
     }
 
     @Test
-    public void testContactDeletion() {
-        Contacts before = app.contact().all();
-        ContactData deletedContact = before.iterator().next();
-        app.contact().delete(deletedContact);
-        app.goTo().homePage();
-        assertEquals(app.contact().count(),before.size() - 1);
-        Contacts after = app.contact().all();
-        assertThat(after, equalTo(before.without(deletedContact)));
+    public void testContactEmail() {
+        ContactData contact = app.contact().all().iterator().next();
+        ContactData contactInfo = app.contact().infoEditForm(contact);
+
+        assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfo)));
+    }
+
+    public String mergeEmails(ContactData contact) {
+        return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+                .stream().filter((s) -> ! s.equals(""))
+                .collect(Collectors.joining("\n"));
     }
 
 }

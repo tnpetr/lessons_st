@@ -25,6 +25,8 @@ public class ContactHelper extends BaseHelper {
         type(By.name("middlename"), contactData.getMname());
         type(By.name("nickname"), contactData.getNickname());
         type(By.name("mobile"), contactData.getMobile());
+        type(By.name("home"), contactData.getHomePhone());
+        type(By.name("work"), contactData.getWorkPhone());
         type(By.name("email"), contactData.getEmail());
         select(By.name("bday"), contactData.getBday());
         select(By.name("bmonth"), contactData.getBmonth());
@@ -85,16 +87,47 @@ public class ContactHelper extends BaseHelper {
         return isElementPresent(By.name("selected[]"));
     }
 
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
+    }
+
+    private Contacts contactCache = null;
+
     public Contacts all() {
+        if (contactCache != null) {
+            return new Contacts();
+        }
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             String fname = element.findElement(By.xpath(".//td[3]")).getText();
             String lname = element.findElement(By.xpath(".//td[2]")).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-            ContactData contact = new ContactData().withId(id).withFname(fname).withLname(lname);
+            String fullAddress = element.findElement(By.xpath(".//td[4]")).getText();
+            String allEmails = element.findElement(By.xpath(".//td[5]")).getText();
+            String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
+            ContactData contact = new ContactData().withId(id).withFname(fname).withLname(lname)
+                    .withAllPhones(allPhones).withAllEmails(allEmails).withAddress(fullAddress);
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    public ContactData infoEditForm(ContactData contact) {
+        editButton(contact.getId());
+        String fname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String homePhohe = wd.findElement(By.name("home")).getAttribute("value");
+        String mobilePhohe = wd.findElement(By.name("mobile")).getAttribute("value");
+        String workPhohe = wd.findElement(By.name("work")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getText();
+        ContactData contactInfo = new ContactData().withId(contact.getId()).withFname(fname).withLname(lname)
+                .withHomePhone(homePhohe).withMobile(mobilePhohe).withWorkPhone(workPhohe)
+                .withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
+        click(By.linkText("home"));
+        return contactInfo;
     }
 }

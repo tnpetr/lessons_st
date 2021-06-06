@@ -6,12 +6,19 @@ public class ContactData {
     private String mname;
     private String nickname;
     private String mobile;
+    private String homePhone;
+    private String workPhone;
     private String email;
+    private String email2;
+    private String email3;
     private String bday;
     private String bmonth;
     private String byear;
     private String title;
     private String group;
+    private String allPhones;
+    private String allEmails;
+    private String address;
     private int id = Integer.MAX_VALUE;
 
     public String getFname() {
@@ -87,6 +94,24 @@ public class ContactData {
         return this;
     }
 
+    public String getHomePhone() {
+        return homePhone;
+    }
+
+    public ContactData withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public ContactData withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+
     public ContactData withEmail(String email) {
         this.email = email;
         return this;
@@ -119,6 +144,51 @@ public class ContactData {
 
     public ContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
+    public ContactData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public ContactData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public ContactData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public ContactData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public ContactData withAddress(String address) {
+        this.address = address;
         return this;
     }
 
