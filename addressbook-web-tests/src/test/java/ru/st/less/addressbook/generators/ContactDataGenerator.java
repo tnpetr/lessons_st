@@ -57,11 +57,12 @@ public class ContactDataGenerator {
                     .withLname(randomString(10))
                     .withMname(randomString(10))
                     .withNickname(randomString(7))
-                    .withMobile(String.valueOf((int)(Math.random())))
+                    .withMobile(String.valueOf(new  Random().nextInt()))
                     .withEmail(randomString(10) + "@" + randomString(5) + "." + randomString(2))
                     .withBday("1")
                     .withBmonth("January")
                     .withByear("2000")
+                    .withGroup("test1")
                     .withTitle(randomString(4))
                     .withAddress(randomString(10) + "\n" + randomString(10))
                     .withPhoto(photo));

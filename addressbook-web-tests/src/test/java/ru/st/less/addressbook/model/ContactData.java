@@ -19,14 +19,17 @@ public class ContactData {
     private String email;
     private String email2;
     private String email3;
+    @Expose
     private String bday;
+    @Expose
     private String bmonth;
+    @Expose
     private String byear;
     private String title;
+    @Expose
     private String group;
     private String allPhones;
     private String allEmails;
-    @Expose
     private String address;
     private File photo;
     private int id = Integer.MAX_VALUE;
