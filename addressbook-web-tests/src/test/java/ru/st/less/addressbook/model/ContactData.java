@@ -1,15 +1,21 @@
 package ru.st.less.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 
 public class ContactData {
+    @Expose
     private String fname;
+    @Expose
     private String lname;
     private String mname;
     private String nickname;
+    @Expose
     private String mobile;
     private String homePhone;
     private String workPhone;
+    @Expose
     private String email;
     private String email2;
     private String email3;
@@ -20,6 +26,7 @@ public class ContactData {
     private String group;
     private String allPhones;
     private String allEmails;
+    @Expose
     private String address;
     private File photo;
     private int id = Integer.MAX_VALUE;
