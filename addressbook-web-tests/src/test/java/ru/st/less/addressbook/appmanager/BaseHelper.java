@@ -37,9 +37,7 @@ public class BaseHelper {
     }
 
     protected void select(By locator, String text) {
-        //wd.findElement(locator).click();
         new Select(wd.findElement(locator)).selectByVisibleText(text);
-        //wd.findElement(By.xpath("//option[@value='" + text + "']")).click();
     }
 
     protected boolean isElementPresent(By by) {

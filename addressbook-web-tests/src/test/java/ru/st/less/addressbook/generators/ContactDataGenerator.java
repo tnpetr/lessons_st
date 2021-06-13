@@ -51,21 +51,17 @@ public class ContactDataGenerator {
 
     private List<ContactData> generateContacts(int count) {
         List<ContactData> contacts = new ArrayList<>();
-        File photo = new File("src/test/resources/photo.png");
         for (int i = 0; i < count; i++) {
             contacts.add(new ContactData().withFname(randomString(10))
                     .withLname(randomString(10))
-                    .withMname(randomString(10))
-                    .withNickname(randomString(7))
                     .withMobile(String.valueOf(new  Random().nextInt()))
+                    .withHomePhone(String.valueOf(new  Random().nextInt()))
+                    .withWorkPhone(String.valueOf(new  Random().nextInt()))
                     .withEmail(randomString(10) + "@" + randomString(5) + "." + randomString(2))
-                    .withBday("1")
-                    .withBmonth("January")
-                    .withByear("2000")
-                    .withGroup("test1")
-                    .withTitle(randomString(4))
-                    .withAddress(randomString(10) + "\n" + randomString(10))
-                    .withPhoto(photo));
+                    .withEmail2(randomString(10) + "@" + randomString(5) + "." + randomString(2))
+                    .withEmail3(randomString(10) + "@" + randomString(5) + "." + randomString(2))
+                    .withAddress(randomString(20))
+                    .withGroup("test1"));
         }
         return contacts;
     }

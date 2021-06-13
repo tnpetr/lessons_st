@@ -15,22 +15,17 @@ public class ContactEmailTests extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().homePage();
-        if (app.contact().all().size() == 0){
+        if (app.db().contacts().size() == 0){
             app.contact().create(new ContactData().withFname("Petr")
                     .withLname("Tatarkin")
-                    .withMname("V")
-                    .withNickname("N")
                     .withMobile("+7123456789")
-                    .withHomePhone("+7-(192)-00000")
-                    .withWorkPhone("186 73")
+                    .withHomePhone("+7123456789")
+                    .withWorkPhone("+7123456789")
                     .withEmail("ptatarkin@n.ru")
                     .withEmail2("ptatarkin@n.ru")
                     .withEmail3("ptatarkin@n.ru")
-                    .withBday("1")
-                    .withBmonth("January")
-                    .withByear("2000")
-                    .withTitle("1")
-                    .withGroup("test3"),true);
+                    .withAddress("asddsad")
+                    .withGroup("test1"),true);
         }
     }
 

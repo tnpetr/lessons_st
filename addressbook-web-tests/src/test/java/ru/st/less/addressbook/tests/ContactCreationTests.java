@@ -1,12 +1,11 @@
 package ru.st.less.addressbook.tests;
 
 import com.google.gson.Gson;
-import org.openqa.selenium.json.TypeToken;
+import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.st.less.addressbook.model.ContactData;
 import ru.st.less.addressbook.model.Contacts;
-import ru.st.less.addressbook.model.GroupData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -42,10 +41,10 @@ public class ContactCreationTests extends TestBase{
   @Test(dataProvider = "validContacts")
   public void testContactCreation(ContactData contact) {
     app.goTo().homePage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().create(contact,true);
     assertEquals(app.contact().count(),before.size() + 1);
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt(c -> c.getId()).max().getAsInt()))));
   }

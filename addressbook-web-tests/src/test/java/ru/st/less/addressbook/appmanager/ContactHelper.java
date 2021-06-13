@@ -22,16 +22,13 @@ public class ContactHelper extends BaseHelper {
     public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFname());
         type(By.name("lastname"), contactData.getLname());
-        type(By.name("middlename"), contactData.getMname());
-        type(By.name("nickname"), contactData.getNickname());
         type(By.name("mobile"), contactData.getMobile());
         type(By.name("home"), contactData.getHomePhone());
         type(By.name("work"), contactData.getWorkPhone());
         type(By.name("email"), contactData.getEmail());
-        select(By.name("bday"), contactData.getBday());
-        select(By.name("bmonth"), contactData.getBmonth());
-        type(By.name("byear"), contactData.getByear());
-        type(By.name("title"), contactData.getTitle());
+        type(By.name("email2"), contactData.getEmail2());
+        type(By.name("email3"), contactData.getEmail3());
+        type(By.name("address"), contactData.getAddress());
         attach(By.name("photo"), contactData.getPhoto());
         if (creation) {
             select(By.name("new_group"), contactData.getGroup());

@@ -1,37 +1,81 @@
 package ru.st.less.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+
     @Expose
+    @Column(name = "firstname")
     private String fname;
+
     @Expose
+    @Column(name = "lastname")
     private String lname;
+
+    @Column(name = "middlename")
     private String mname;
+
     private String nickname;
+
     @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobile;
+
+    @Expose
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
+
+    @Expose
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhone;
+
     @Expose
+    @Type(type = "text")
     private String email;
+
+    @Expose
+    @Type(type = "text")
     private String email2;
+
+    @Expose
+    @Type(type = "text")
     private String email3;
-    @Expose
-    private String bday;
-    @Expose
+
+    @Column(columnDefinition = "TINYINT")
+    private int bday;
     private String bmonth;
-    @Expose
     private String byear;
     private String title;
+
     @Expose
+    @Transient
     private String group;
+
+    @Transient
     private String allPhones;
+
+    @Transient
     private String allEmails;
+
+    @Expose
+    @Column(name = "address")
+    @Type(type = "text")
     private String address;
-    private File photo;
+
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
+
+    @Id
     private int id = Integer.MAX_VALUE;
 
     public String getFname() {
@@ -59,7 +103,7 @@ public class ContactData {
     }
 
     public String getBday() {
-        return bday;
+        return Integer.toString(bday);
     }
 
     public String getBmonth() {
@@ -131,7 +175,7 @@ public class ContactData {
     }
 
     public ContactData withBday(String bday) {
-        this.bday = bday;
+        this.bday = Integer.parseInt(bday);
         return this;
     }
 
@@ -206,11 +250,15 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return photo;
+        if (photo == null) {
+            return null;
+        } else {
+            return new File(photo);
+        }
     }
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -223,13 +271,27 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (fname != null ? !fname.equals(that.fname) : that.fname != null) return false;
-        return lname != null ? lname.equals(that.lname) : that.lname == null;
+        if (lname != null ? !lname.equals(that.lname) : that.lname != null) return false;
+        if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
+        if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
+        if (workPhone != null ? !workPhone.equals(that.workPhone) : that.workPhone != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+        if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
+        return address != null ? address.equals(that.address) : that.address == null;
     }
 
     @Override
     public int hashCode() {
         int result = fname != null ? fname.hashCode() : 0;
         result = 31 * result + (lname != null ? lname.hashCode() : 0);
+        result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
+        result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
+        result = 31 * result + (workPhone != null ? workPhone.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+        result = 31 * result + (email3 != null ? email3.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + id;
         return result;
     }
@@ -239,6 +301,13 @@ public class ContactData {
         return "ContactData{" +
                 "fname='" + fname + '\'' +
                 ", lname='" + lname + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                ", email='" + email + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
+                ", address='" + address + '\'' +
                 ", id=" + id +
                 '}';
     }
