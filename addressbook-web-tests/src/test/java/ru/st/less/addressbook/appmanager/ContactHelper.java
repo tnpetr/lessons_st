@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import ru.st.less.addressbook.model.ContactData;
 import ru.st.less.addressbook.model.Contacts;
+import ru.st.less.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -31,7 +32,10 @@ public class ContactHelper extends BaseHelper {
         type(By.name("address"), contactData.getAddress());
         attach(By.name("photo"), contactData.getPhoto());
         if (creation) {
-            select(By.name("new_group"), contactData.getGroup());
+            if (contactData.getGroups().size() == 0) {
+                Assert.assertTrue(contactData.getGroups().size() == 1);
+                select(By.name("new_group"), contactData.getGroups().iterator().next().getGroupname());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -127,5 +131,35 @@ public class ContactHelper extends BaseHelper {
                 .withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
         click(By.linkText("home"));
         return contactInfo;
+    }
+
+    public void selectGroupForContact(GroupData group, boolean removeFlag) {
+        if (removeFlag) {
+            click(By.name("group"));
+            select(By.name("group"), group.getGroupname());
+            click(By.xpath(String.format("(//option[@value='%s'])", group.getId())));
+        } else {
+            click(By.xpath(String.format("(//option[@value='%s'])[2]", group.getId())));
+            click(By.name("add"));
+        }
+    }
+
+    public void goToGroupPage(GroupData group) {
+        click(By.linkText(String.format("group page \"%s\"",
+                group.getGroupname())));
+    }
+
+    public void addContactToGroup(ContactData contact, GroupData group) {
+        selectContact(contact.getId());
+        selectGroupForContact(group, false);
+        goToGroupPage(group);
+    }
+
+    public void removeContactToGroup(ContactData contact, GroupData group) {
+        selectContact(contact.getId());
+        selectGroupForContact(group,true);
+        selectContact(contact.getId());
+        click(By.name("remove"));
+        goToGroupPage(group);
     }
 }

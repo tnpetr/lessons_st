@@ -24,8 +24,7 @@ public class ContactEmailTests extends TestBase {
                     .withEmail("ptatarkin@n.ru")
                     .withEmail2("ptatarkin@n.ru")
                     .withEmail3("ptatarkin@n.ru")
-                    .withAddress("asddsad")
-                    .withGroup("test1"),true);
+                    .withAddress("asddsad"),true);
         }
     }
 
@@ -35,12 +34,6 @@ public class ContactEmailTests extends TestBase {
         ContactData contactInfo = app.contact().infoEditForm(contact);
 
         assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfo)));
-    }
-
-    public String mergeEmails(ContactData contact) {
-        return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
-                .stream().filter((s) -> ! s.equals(""))
-                .collect(Collectors.joining("\n"));
     }
 
 }

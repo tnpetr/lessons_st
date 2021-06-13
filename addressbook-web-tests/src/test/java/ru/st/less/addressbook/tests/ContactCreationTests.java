@@ -2,10 +2,13 @@ package ru.st.less.addressbook.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.st.less.addressbook.model.ContactData;
 import ru.st.less.addressbook.model.Contacts;
+import ru.st.less.addressbook.model.GroupData;
+import ru.st.less.addressbook.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -35,6 +38,14 @@ public class ContactCreationTests extends TestBase{
       List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {
       }.getType());
       return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
+    }
+  }
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    app.goTo().groupPage();
+    if (app.db().groups().size() == 0) {
+      app.group().create(new GroupData().withGroupname("test1"));
     }
   }
 

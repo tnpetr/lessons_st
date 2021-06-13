@@ -1,5 +1,6 @@
 package ru.st.less.addressbook.appmanager;
 
+import com.mysql.cj.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -39,5 +40,25 @@ public class DbHelper {
         session.getTransaction().commit();
         session.close();
         return new Contacts(result);
+    }
+
+    public GroupData findGroup(int groupId) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        String query = "from GroupData where id = " + groupId;
+        GroupData result = (GroupData) session.createQuery(query).getSingleResult();
+        session.getTransaction().commit();
+        session.close();
+        return result;
+    }
+
+    public ContactData findContact(int contactId) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        String query = "from ContactData where id = " + contactId;
+        ContactData result = (ContactData) session.createQuery(query).getSingleResult();
+        session.getTransaction().commit();
+        session.close();
+        return result;
     }
 }

@@ -23,8 +23,7 @@ public class ContactModificationTests extends TestBase {
                     .withEmail("ptatarkin@n.ru")
                     .withEmail2("ptatarkin@n.ru")
                     .withEmail3("ptatarkin@n.ru")
-                    .withAddress("asddsad")
-                    .withGroup("test1"),true);
+                    .withAddress("asddsad"),true);
         }
     }
 
@@ -45,9 +44,8 @@ public class ContactModificationTests extends TestBase {
         app.contact().edit(contact);
         assertEquals(app.contact().count(),before.size());
         Contacts after = app.db().contacts();
-        System.out.println(editContact);
-        System.out.println(contact);
         assertThat(after, equalTo(before.without(editContact).withAdded(contact)));
+        verifyContactListInUI();
     }
 
 }

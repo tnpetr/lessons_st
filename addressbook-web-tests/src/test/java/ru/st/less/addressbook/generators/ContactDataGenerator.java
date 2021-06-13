@@ -60,8 +60,7 @@ public class ContactDataGenerator {
                     .withEmail(randomString(10) + "@" + randomString(5) + "." + randomString(2))
                     .withEmail2(randomString(10) + "@" + randomString(5) + "." + randomString(2))
                     .withEmail3(randomString(10) + "@" + randomString(5) + "." + randomString(2))
-                    .withAddress(randomString(20))
-                    .withGroup("test1"));
+                    .withAddress(randomString(20)));
         }
         return contacts;
     }

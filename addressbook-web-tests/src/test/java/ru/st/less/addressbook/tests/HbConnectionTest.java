@@ -32,7 +32,7 @@ public class HbConnectionTest {
         }
     }
 
-    @Test
+    @Test(enabled=false)
     public void testHbConnection() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -40,8 +40,25 @@ public class HbConnectionTest {
                 session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
         for (ContactData contact : result) {
             System.out.println(contact);
+            System.out.println(contact.getGroups());
         }
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Test(enabled=true)
+    public void test() {
+        contactsToGroups(56, 26);
+    }
+
+    public Boolean contactsToGroups(int contactId, int groupId) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        String query = "SELECT COUNT(id) FROM address_in_groups WHERE id = " + contactId + " and group_id = " + groupId;
+        int result = (int) session.createQuery(query).getSingleResult();
+        session.getTransaction().commit();
+        session.close();
+        System.out.println(result);
+        return (result != 0);
     }
 }
