@@ -19,8 +19,25 @@ public class GroupData {
     @Column(name = "group_name")
     private String groupname;
 
-    @ManyToMany(mappedBy = "groups")
-    private Set<ContactData> contacts = new HashSet<ContactData>();
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
+    private Set<ContactData> contacts = new HashSet<>();
+
+    @Expose
+    @Column(name = "group_header")
+    @Type(type = "text")
+    private String groupheader;
+    @Expose
+    @Column(name = "group_footer")
+    @Type(type = "text")
+    private String groupfooter;
+
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "id='" + id + '\'' +
+                ", groupname='" + groupname + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -43,23 +60,6 @@ public class GroupData {
         result = 31 * result + (groupheader != null ? groupheader.hashCode() : 0);
         result = 31 * result + (groupfooter != null ? groupfooter.hashCode() : 0);
         return result;
-    }
-
-    @Expose
-    @Column(name = "group_header")
-    @Type(type = "text")
-    private String groupheader;
-    @Expose
-    @Column(name = "group_footer")
-    @Type(type = "text")
-    private String groupfooter;
-
-    @Override
-    public String toString() {
-        return "GroupData{" +
-                "id='" + id + '\'' +
-                ", groupname='" + groupname + '\'' +
-                '}';
     }
 
     public GroupData withId(int id) {
@@ -98,7 +98,7 @@ public class GroupData {
         return groupfooter;
     }
 
-    public Set<ContactData> getContacts() {
-        return contacts;
+    public Contacts getContacts() {
+        return new Contacts(contacts);
     }
 }
