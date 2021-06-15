@@ -25,6 +25,7 @@ public class ResetPasswordTests extends TestBase{
         String userName = user.getUsername();
         System.out.println(userName);
         String password = "password";
+//        app.james().createUser(userName, password);
         List<MailMessage> mailMessages = app.james().waitForMail(userName, password, 60000);
         String confirmationLink = findConfirmationLink(mailMessages, email);
         app.user().changePassword(confirmationLink, "newPassword");

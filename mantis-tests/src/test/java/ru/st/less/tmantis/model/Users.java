@@ -10,10 +10,6 @@ public class Users  extends ForwardingSet<UserData> {
 
     private Set<UserData> delegate;
 
-//    public Users(Users users) {
-//        this.delegate = new HashSet<>(users.delegate);
-//    }
-
     public Users(Collection<UserData> users) {
         this.delegate = new HashSet<>(users);
     }

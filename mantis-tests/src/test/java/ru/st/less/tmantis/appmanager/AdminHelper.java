@@ -11,13 +11,11 @@ public class AdminHelper extends BaseHelper{
     }
 
     public void resetPasswordForUser(UserData user) throws IOException {
-        HttpSession session = app.newSession();
         login("administrator", "root");
         click(By.cssSelector("a[href=\"/mantisbt-1.3.20/manage_overview_page.php\""));
         click(By.cssSelector("a[href=\"/mantisbt-1.3.20/manage_user_page.php\""));
         click(By.cssSelector("a[href=\"manage_user_edit_page.php?user_id=" + user.getId() + "\""));
         click(By.cssSelector("form[id=\"manage-user-reset-form\"]"));
-        //click(By.xpath("//span/input[@value='Сбросить пароль']"));
     }
 
     private void login(String username, String password) {

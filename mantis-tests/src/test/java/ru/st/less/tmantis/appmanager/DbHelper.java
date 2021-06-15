@@ -30,12 +30,4 @@ public class DbHelper {
         return new Users(result);
     }
 
-//    public UserData userWithId(int id) {
-//        Session session = sessionFactory.openSession();
-//        session.beginTransaction();
-//        UserData contact = (UserData) session.createQuery( "from UserData where id =" + id).getSingleResult();
-//        session.getTransaction().commit();
-//        session.close();
-//        return contact;
-//    }
 }
